@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redefinir Senha</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+<div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+<h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Redefinir Senha</h2>
+<form action="/redefinir-senha" method="POST">
+<input type="hidden" id="token" name="token" value="<!-- Token aqui -->">
+<div class="mb-4">
+<label for="novaSenha" class="block text-sm font-medium text-gray-700">Nova Senha</label>
+<input type="password" id="novaSenha" name="novaSenha" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Digite sua nova senha">
+</div>
+<button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-300">Redefinir Senha</button>
+</form>
+</div>
+</body>
+</html>

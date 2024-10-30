@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendamento de Consulta</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+<div class="container mx-auto max-w-lg bg-white p-8 rounded-lg shadow-lg">
+<h1 class="text-2xl font-bold mb-6 text-center">Agendar Consulta</h1>
+<form id="agendamentoForm">
+<label for="especialidade_id" class="block text-sm font-medium text-gray-700">Especialidade:</label>
+<select id="especialidade_id" name="especialidade_id" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+<option value="">Selecione uma especialidade</option>
+<option value="1">Cardiologista</option>
+<option value="2">Psiquiatra</option>
+<option value="3">Dermatologista</option>
+
+</select>
+<br>
+
+<label for="paciente_nome" class="block text-sm font-medium text-gray-700">Nome do Paciente:</label>
+<input type="text" id="paciente_nome" name="paciente_nome" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+<br>
+
+<label for="medico" class="block text-sm font-medium text-gray-700">Médico:</label>
+<select id="medico" name="medico" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+<option value="">Selecione um médico</option>
+
+</select>
+<br>
+
+<label for="data" class="block text-sm font-medium text-gray-700">Data:</label>
+<input type="date" id="data" name="data" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+<br>
+
+<label for="hora" class="block text-sm font-medium text-gray-700">Hora:</label>
+<input type="time" id="hora" name="hora" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+<br>
+
+<button type="submit" class="mt-4 w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-200">Agendar Consulta</button>
+</form>
+
+<button id="voltarBtn" class="mt-4 w-full bg-gray-300 text-black py-2 rounded-md hover:bg-gray-400 transition duration-200">Voltar</button>
+</div>
+
+<script>
+const form = document.getElementById('agendamentoForm');
+const voltarBtn = document.getElementById('voltarBtn');
+const especialidadeSelect = document.getElementById('especialidade_id');
+const medicoSelect = document.getElementById('medico');
+
+especialidadeSelect.addEventListener('change', async (event) => {
+const especialidadeId = event.target.value;
+medicoSelect.innerHTML = '<option value="">Selecione um médico</option>'; 
+
+if (especialidadeId) {
+try {
+const response = await fetch(`http://localhost:3000/medicos?especialidade_id=${especialidadeId}`);
+
+if (!response.ok) {
+    throw new Error('Erro ao buscar médicos');
+}
+
+const medicos = await response.json();
+medicos.forEach(medico => {
+    const option = document.createElement('option');
+    option.value = medico.id;
+    option.textContent = medico.nome;
+    medicoSelect.appendChild(option);
+});
+} catch (error) {
+console.error('Erro ao buscar médicos:', error);
+alert('Erro ao carregar médicos. Tente novamente.');
+}
+}
+});
+
+form.addEventListener('submit', async (event) => {
+event.preventDefault(); 
+
+const especialidade_id = especialidadeSelect.value;
+const paciente_nome = document.getElementById('paciente_nome').value;
+const medico = medicoSelect.value;
+const data = document.getElementById('data').value;
+const hora = document.getElementById('hora').value;
+
+console.log('Dados do formulário:', { especialidade_id, paciente_nome, medico, data, hora }); 
+
+try {
+    const response = await fetch('http://localhost:3000/consultas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ especialidade_id, paciente_nome, medico, data, hora })
+    });
+
+
+if (!response.ok) {
+throw new Error(`Erro: ${response.statusText}`);
+}
+
+const result = await response.json();
+console.log('Resultado do agendamento:', result);
+alert('Consulta agendada com sucesso!'); 
+
+
+window.location.href = 'minhas-consultas.html';
+} catch (error) {
+console.error('Erro ao agendar consulta:', error);
+alert('Erro ao agendar consulta. Verifique os dados e tente novamente.'); 
+}
+});
+
+voltarBtn.addEventListener('click', () => {
+window.location.href = 'menu_inicial.html'; 
+});
+</script>
+</body>
+</html>

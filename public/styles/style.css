@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0; /* Remove a margem padrão do body */
+    background-image: url('https://www.doctormax.com.br/wp-content/uploads/2019/08/como-abrir-clínica-ou-consultório-médico.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Garante que a imagem de fundo não role com o conteúdo */
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.8); /* Adiciona uma leve cor de fundo ao header para melhorar a legibilidade */
+    position: relative;
+    z-index: 1; /* Garante que o header fique acima da imagem de fundo */
+    padding: 20px; /* Adiciona algum padding ao header para separá-lo do conteúdo */
+}
+
+.container {
+    padding-top: 80px; /* Ajusta o padding para criar espaço suficiente no topo */
+}
+
+main {
+    padding-bottom: 60px; /* Ajusta o padding inferior para garantir que o conteúdo não fique sobreposto pelo footer */
+}
+
+footer {
+    height: 50px;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-size: auto 40%; /* Ajusta o tamanho da imagem em dispositivos móveis para não ficar tão grande */
+    }
+}
+
+

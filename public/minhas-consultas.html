@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minhas Consultas</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
+<h1 class="text-2xl font-bold text-center mb-6">Minhas Consultas</h1>
+<div id="consultaInfo" class="mb-6 space-y-4">
+
+</div>
+<div class="text-center">
+<button onclick="window.location.href='menu_inicial.html'" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+Voltar
+</button>
+</div> 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+fetch('./minhas-consultas')
+.then(response => response.json())
+.then(data => {
+if (data.logado) {
+const consultaInfoDiv = document.getElementById('consultaInfo');
+const consultas = data.consultas;
+
+if (consultas.length > 0) {
+consultas.forEach(consulta => {
+consultaInfoDiv.innerHTML += `
+<p><strong>Paciente:</strong> ${consulta.paciente}</p>
+<p><strong>Data:</strong> ${new Date(consulta.data_consulta).toLocaleDateString()}</p>
+<p><strong>Hora:</strong> ${consulta.horario_consulta}</p>
+<p><strong>Especialidade:</strong> ${consulta.especialidade}</p>
+<p><strong>Médico:</strong> ${consulta.medico}</p>
+<hr>
+`;
+});
+} else {
+consultaInfoDiv.innerHTML = '<p>Nenhuma consulta agendada.</p>';
+}
+} else {
+window.location.href = 'menu_inicial.html';
+}
+})
+.catch(error => {
+console.error('Erro ao carregar as consultas do usuário:', error);
+});
+});
+
+</script>
+
+</body>
+</html>

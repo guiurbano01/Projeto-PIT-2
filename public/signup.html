@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tela de Login</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100" style="background-image: url('https://blog.leucotron.com.br/wp-content/uploads/2017/10/entenda-os-maiores-desafios-de-abrir-um-consultorio-medico-hoje.jpeg'); background-size: cover; background-position: center; position: relative;">
+<div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+<h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Faça seu Login</h2>
+<form action="/login" method="POST">
+<div class="mb-4">
+<label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+<input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Digite o seu Email">
+</div>
+<div class="mb-6">
+<label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+<input type="password" id="password" name="senha" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="********">
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+<label for="remember_me" class="ml-2 block text-sm text-gray-900">Lembrar-me</label>
+</div>
+<a href="/recuperar_senha.html" class="text-sm text-blue-600 hover:underline">Esqueceu a senha?</a>
+</div>
+<button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-300">Entrar</button>
+</form>
+<div class="mt-6 text-center">
+<p class="text-sm text-gray-600">Não tem uma conta? <a href="/cadastro_usuario.html" class="text-blue-600 hover:underline">Cadastre-se</a></p>
+</div>
+</div>
+</body>
+</html>
