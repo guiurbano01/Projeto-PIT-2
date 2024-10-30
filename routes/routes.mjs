@@ -296,7 +296,7 @@ router.post('/redefinir-senha', async (req, res) => {
     }
 });
 
-module.exports = conexao;
+export default router;
 
 
 
