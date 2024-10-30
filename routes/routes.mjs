@@ -16,7 +16,7 @@ const router = express.Router();
 
 
 const db = mysql2.createPool({
-host: process.env.DB_HOST || 'localhost',
+host: process.env.DB_HOST,
 user: process.env.DB_USER,
 password: process.env.DB_PASSWORD,
 database: process.env.DB_NAME
@@ -217,7 +217,7 @@ return res.status(404).json({ message: 'Paciente não encontrado.' });
 
 const paciente_id = paciente[0].id;
 await db.execute(`INSERT INTO consultas (paciente_id, medico_id, especialidade_id, data_consulta, horario_consulta)
-VALUES (?, ?, ?, ?, ?)`, [paciente_id, medico, especialidade_id, data, hora]);
+    VALUES (?, ?, ?, ?, ?)`, [paciente_id, medico, especialidade_id, data, hora]);
 
 
 const [novaConsulta] = await db.execute(`
@@ -342,7 +342,14 @@ listaConsultas.appendChild(itemConsulta);
 console.error('Erro ao atualizar consultas:', error);
 }
 }
+
+
+
+
+
+
 export default router;
+
 
 
 
