@@ -1,6 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
-import mysql2 from 'mysql2/promise'; 
+import mysql from 'mysql/promise'; 
 import path from 'path';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 const router = express.Router();
 
-const db = mysql2.createPool({
+const db = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -296,5 +296,7 @@ router.post('/redefinir-senha', async (req, res) => {
     }
 });
 
-export default router;
+module.exports = conexao;
+
+
 
