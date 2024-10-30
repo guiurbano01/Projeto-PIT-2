@@ -64,6 +64,4 @@ return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
 
 
 
-app.listen(PORT, () => {
-console.log(`Servidor rodando na porta ${PORT}`);
-});
+export default app;
